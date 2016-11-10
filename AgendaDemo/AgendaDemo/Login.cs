@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AgendaDemo
 {
-    public static class Conexion
+    public interface Login
     {
-        public static string conexion = @"https://tesh.azurewebsites.net/";
+        Task<bool> Authenticate();
     }
 }

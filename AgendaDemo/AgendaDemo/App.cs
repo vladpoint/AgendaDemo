@@ -6,11 +6,17 @@ using Microsoft.WindowsAzure.MobileServices;
 using Newtonsoft.Json;
 
 using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace AgendaDemo
 {
     public class App : Application
     {
+        public static Login Authenticator { get; private set; }
+        public static void Init(Login authenticator)
+        {
+            Authenticator = authenticator;
+        }
         public App()
         {
             // The root page of your application
@@ -32,6 +38,15 @@ namespace AgendaDemo
             Button leer = new Button()
             {
                 Text = "leer Tabla"
+            };
+            Button login = new Button()
+            {
+                Text = "login"
+            };
+            login.Clicked += async (sender, args) =>
+            {
+                bool authenticated = false;
+                authenticated = await App.Authenticator.Authenticate();
             };
             ListView lista = new ListView();
             ListView lista2 = new ListView();
@@ -110,6 +125,7 @@ namespace AgendaDemo
             layout.Children.Add(nombre1);
             layout.Children.Add(apellido1);
             layout.Children.Add(telefono1);
+            layout.Children.Add(login);
             layout.Children.Add(enviar);
             layout.Children.Add(leer);
             layout.Children.Add(actualizar);
@@ -121,7 +137,7 @@ namespace AgendaDemo
             };
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
             // Handle when your app starts
         }
