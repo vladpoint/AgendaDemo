@@ -46,7 +46,10 @@ namespace AgendaDemo
             login.Clicked += async (sender, args) =>
             {
                 bool authenticated = false;
-                authenticated = await App.Authenticator.Authenticate();
+                if (Authenticator!=null)
+                {
+                    authenticated = await App.Authenticator.Authenticate();
+                }
             };
             ListView lista = new ListView();
             ListView lista2 = new ListView();

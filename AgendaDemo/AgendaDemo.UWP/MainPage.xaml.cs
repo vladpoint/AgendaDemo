@@ -28,10 +28,11 @@ namespace AgendaDemo.UWP
             var success = false;
             try
             {
-                user = await client.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
+                user = await client.LoginAsync(MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
                 if (user != null)
                 {
                     success = true;
+                    await new MessageDialog(user.UserId, "Bienvenido").ShowAsync();
                 }
             }
             catch (Exception ex)
